@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script type="text/javascript">
+window.onload = function(){
+
+	var mC = document.getElementById('myCn');
+	var mGC = mC.getContext('2d');
+	var test = document.getElementById('test');
+	var oTime = document.getElementById('time');
+	var aUl = document.getElementsByTagName('ul');
+	var aColon = oTime.getElementsByTagName('div');
+	var oSpan = document.getElementsByTagName('span');
+	var aImg_top = document.getElementsByClassName('top');
+	var aImg_bottom = document.getElementsByClassName('bottom');
+	var aLi = [];
+	var timer=null;
+	var timerOut = null;
+	var onOff = true;
+	var time = new Date();
+	var Hour = time.getHours();
+	var Min = time.getMinutes();
+	var Sec = time.getSeconds();
+	var strOriginal = trans(Hour)+trans(Min)+trans(Sec);
+	var strTitle = trans(Hour)+':'+trans(Min)+':'+trans(Sec);
+
+	setInterval(toDraw,30);
+
+	function toDraw(){
+
+		mGC.clearRect(0,0, mC.width, mC.height);
+		var x = 250;
+		var y = 250;
+		var r = 200;
+		var oDate=new Date();
+		var oHours = oDate.getHours();
+		var oMin = oDate.getMinutes();
+		var oSec = oDate.getSeconds();
+
+		oHours= oHours>=12 ? (-90+30*(oHours-12)+oMin*6/12)*Math.PI/180 : (-90+30*oHours+oMin*6/12)*Math.PI/180;
+		oMin = (-90+6*oMin)*Math.PI/180;
+		oSec = (-90+6*oSec)*Math.PI/180;
+
+
+		for (var i=0; i < 360/6; i++)
+		{
+			mGC.beginPath();
+			mGC.moveTo(x,y);
+			mGC.arc(x,y,r, i*6*Math.PI/180, (i+1)*6*Math.PI/180);
+			mGC.stroke();
+			mGC.closePath();
+		}
+			mGC.fillStyle='#FFF';
+			mGC.beginPath();
+			mGC.moveTo(x,y);
+			mGC.arc(x,y,r*19/20, 0, 360);
+			mGC.fill();
+			mGC.closePath();
+
+		for (var i=0; i < 360/30; i++)
+		{
+			mGC.lineWidth=5;
+			mGC.beginPath();
+			mGC.moveTo(x,y);
+			mGC.arc(x,y,r, i*30*Math.PI/180, (i+1)*30*Math.PI/180);
+			mGC.stroke();
+			mGC.closePath();
+		}
+			mGC.fillStyle='#FFF';
+			mGC.beginPath();
+			mGC.moveTo(x,y);
+			mGC.arc(x,y,r*18/20, 0, 360);
+			mGC.fill();
+			mGC.closePath();
+
+			mGC.beginPath();
+			mGC.moveTo(x,y);
+			mGC.arc(x,y,r*9/20, oHours, oHours);
+			mGC.stroke();
+			mGC.closePath();
+
+			mGC.lineWidth=3;
+			mGC.beginPath();
+			mGC.moveTo(x,y);
+			mGC.arc(x,y,r*15/20, oMin, oMin);
+			mGC.stroke();
+			mGC.closePath();
+
+			mGC.lineWidth=2;
+			mGC.beginPath();
+			mGC.moveTo(x,y);
+			mGC.arc(x,y,r*17/20, oSec, oSec);
+			mGC.stroke();
+			mGC.closePath();
+	}
+
+
+	for(var i = 0; i<aUl.length; i++)
+	{
+		var arr = aUl[i].getElementsByTagName('li');
+		for (var j=0; j<arr.length; j++)
+		{
+			aLi.push(arr[j]);
+		}
+	}
+	for(var i = 0; i<aUl.length;i++)
+	{
+		aUl[i].style.left = 180*i + 'px';
+	}
+	for(var i=0; i<aColon.length;i++)
+	{
+		aColon[i].style.left =120 + 180*i + 'px';
+	}
+	for (var i =0 ; i<aUl.length; i++)
+	{
+		var arr = aUl[i].getElementsByTagName('li');
+		for(var j=0; j<arr.length; j++)
+		{
+		arr[j].style.left = 60*j + 'px';
+		}
+	} // setup the construction
+
+	for (var i = 0; i<aImg_top.length;i++)
+	{
+		aImg_top[i].src = 'time/'+strOriginal.charAt(i)+'.png';
+	}
+
+	function getTime(){
+		var time = new Date();
+		var Hour = time.getHours();
+		var Min = time.getMinutes();
+		var Sec = time.getSeconds();
+		var str = trans(Hour)+trans(Min)+trans(Sec);
+		var strTitle = trans(Hour)+':'+trans(Min)+':'+trans(Sec);
+		document.title = strTitle;
+		
+		for(var i=0; i<aLi.length;i++)
+		{
+			aImg_bottom[i].src = 'time/'+strOriginal.charAt(i)+'.png';
+			if (str.charAt(i) > strOriginal.charAt(i) || parseInt(str.charAt(i))>parseInt(strOriginal.charAt(i)) && parseInt(str.charAt(i))===0)
+			{
+			strOriginal = str;
+			doMove(aImg_top[i],'bottom',10,100,0);
+			doMove(aImg_bottom[i],'bottom',10,0,-100);
+			aImg_bottom[i].src = 'time/'+str.charAt(i)+'.png';
+			} else {
+				aImg_top[i].src= 'time/'+str.charAt(i)+'.png';
+			}
+		}
+
+		for (var i=0; i<aColon.length;i++)
+		{
+			if (onOff)
+			{
+			aColon[i].getElementsByTagName('img')[0].src = 'time/colon.jpg';
+			}
+			else
+			{
+			aColon[i].getElementsByTagName('img')[0].src = 'time/colon_none.png';
+			}
+		}
+		onOff = !onOff;
+
+		function last(obj1,obj2,attr)
+		{
+			obj1[attr]= obj2[attr];
+		}	
+
+		
+
+	} // getTime
+
+	getTime();
+
+	timer = setInterval(getTime,500);
+
+	function trans(number)
+	{
+		return number<9? '0'+ number.toString():number.toString();
+	}
+	function getStyle(obj,attr)
+	{
+		return obj.currentStyle? obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+	}  // function arr
+
+	function doMove(obj,attr,dir,target,iniPosition)
+	{
+		var speed = null;
+		clearInterval(obj.timer);
+		obj.timer=setInterval(function()
+		{
+			speed = parseInt(getStyle(obj,attr)) + dir;
+			if (speed < target)
+			{
+				obj.style[attr] = speed + 'px';	
+			} else {
+				obj.style[attr] = target + 'px';
+				clearInterval(obj.timer);
+				obj.style[attr]=iniPosition +'px';	
+			}
+				
+		},50);		
+	}  // function serial
+}
+</script>
+<style>
+	body {margin:0; background:#FFF;}
+	#myCn {position: absolute; top: 50px; left: 200px; background:#FFF;}
+	ul,li {margin: 0px; padding: 0px; list-style: none;}
+	ul,li,div {display: inline-block;}
+	li {width: 60px;height: 100px; overflow: hidden;} 
+	#time{position: relative; top: 100px;left: 800px; }
+	ul,li,#time div {position: absolute;}
+	#time div{width: 60px;height: 100px; }
+	#time img {width: 60px;height: 100px;}
+	.top {position: absolute; bottom:0px;}
+	.bottom{position: absolute; bottom:-100px;}
+</style>
+</head>
+<body>
+	
+	<canvas id="myCn" width='500px' height='500px'></canvas>
+	<div id='time'>
+	<ul>
+		<li>
+			<img class='top' src="" alt="hour1">
+			<img class='bottom' src="" alt="hour1_next">
+		</li>
+		<li>
+			<img class='top'src="" alt="hour2">
+			<img class='bottom' src="" alt="hour2_next">
+		</li>
+	</ul>
+		<div>
+			<img src="" alt="colon">
+		</div>
+	<ul>
+		<li>
+			<img class='top' src="" alt="min1">
+			<img class='bottom' src="" alt="min1_next">
+		</li>
+		<li>
+			<img class='top' src="" alt="min2">
+			<img class='bottom' src="" alt="min2_next">
+		</li>
+	</ul>
+		<div>
+			<img src="" alt="colon">
+		</div>
+	<ul>
+		<li><img class='top' src="" alt="sec1">
+			<img class='bottom' src="" alt="sec1_next"></li>
+		<li>
+			<img class='top' src="" alt="sec2">
+			<img class='bottom' src="" alt="sec2_next"></li>
+		</li>
+	</ul>
+	</div>
+
+</body>
+</html>

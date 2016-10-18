@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	
+	#box,#b1,#b2{
+
+		margin: 60px auto;
+		height: 300px;
+		width: 300px;
+		position: relative;
+
+	}
+
+	#b1{
+
+		position: absolute;
+		background:red;
+	}
+
+	#b2{
+
+		position: absolute;
+		top: 8px;
+		left: 8px;
+		background:#000;
+		z-index: -1;
+		opacity: 0.4;
+		filer:alpha(opacity:40);
+	}
+
+</style>
+
+<script>
+	
+window.onload = function () {
+	var oBox = document.getElementById('box');
+	var oB1 = document.getElementById('b1');
+	var oB2 = document.getElementById('b2');
+	var oTrn = document.getElementById('trn');
+	var Bl = true;
+
+	oTrn.onclick = function (){
+	if (Bl == true){
+	oB2.style.zIndex = '999';
+	oB2.style.opacity = '1';
+	oB1.style.opacity = '0.4';
+	oB2.style.top = '0';
+	oB2.style.left = '0';
+	oB1.style.left = '8px';
+	oB1.style.top = '8px';
+	Bl = false;
+	}
+	else {
+	oB2.style.zIndex = '-1';
+	oB1.style.opacity = '1';
+	oB2.style.opacity = '0.4';
+	oB2.style.top = '8px';
+	oB2.style.left = '8px';
+	oB1.style.left = '0';
+	oB1.style.top = '0';
+	Bl = true;
+	}
+	}
+}
+</script>
+
+<body>
+	
+<div id="box">
+	
+	<div id="b1"></div>
+	<div id="b2"></div>
+
+	<input id="trn" type="button" value="transition" />
+
+</div>
+
+</body>
+</html>

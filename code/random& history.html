@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+window.onload = function(){
+	var oInp = document.querySelector('[type="button"]');
+	var oDiv = document.querySelector('div');
+	oInp.onclick = function(){
+		var arrStr = randomNum(36,8)
+		oDiv.innerHTML=arrStr;
+		history.pushState(arrStr,'');
+	}
+	window.onpopstate=function(ev){
+		oDiv.innerHTML=ev.state;
+	}
+
+	function randomNum(iAll, iNeed){
+		var arrAll = [];
+		var arrNeed = [];
+
+		for (var i=0; i<iAll; i++)
+		{
+			arrAll.push(i);
+		}
+
+		for (var i=0; i<iNeed; i++)
+		{
+			var num=arrAll.splice(Math.floor(Math.random()*35),1);
+			arrNeed.push(num);
+		}
+
+		return arrNeed;
+	}
+}
+</script>
+</head>
+<body>
+	<input type="button" value="create 7 random digit" />
+	<div></div>
+</body>
+</html>

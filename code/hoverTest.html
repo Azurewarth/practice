@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<script>
+	
+	window.onload = function (){
+
+		var aUl = document.getElementsByTagName('ul');
+		var aLi = aUl[0].getElementsByTagName('li');
+		var color = ['red','blue','yellow'];
+		var str = '';
+		var oldIndex = '';
+		var oldLi = aLi[0];
+
+		for (var i=0; i<aLi.length; i++)
+		{
+			aLi[i].style.background = color[i%color.length];
+			aLi[i].index = i;
+		}
+
+		for (var i=0; i<aLi.length;i++)
+		{
+			aLi[i].onmouseover = function(){
+				str = this.style.background;
+				this.style.background = 'gray';
+			}
+
+			aLi[i].onmouseout = function(){
+
+			if(this.style.background == 'black')
+			{
+				
+			} else {
+				this.style.background = str;
+			}
+		}
+
+			aLi[i].onclick = function(){
+				oldLi.style.background = color[oldIndex % color.length];
+				oldLi = this;
+				this.style.background = 'black';
+				oldIndex = this.index;
+			}
+		}
+
+	}
+
+</script>
+
+<style>
+	
+	ul, li {margin: 0px; padding: 0px; height: 20px; list-style: none;}
+	li {margin-top: 20px;}
+</style>
+<body>
+	
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</body>
+</html>

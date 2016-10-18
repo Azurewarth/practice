@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+window.onload = function(){
+	var oDiv = document.getElementById('book');
+	var oA = document.getElementsByTagName('a')[0];
+	var oP = document.getElementsByTagName('p')[0];
+
+	oA.onOff = true;
+	oP.style.height = '100%';
+	oP.style.overflow = 'visible';
+	var unFold = oP.offsetHeight;
+	oP.style.overflow = 'hidden';
+	oP.style.height = '110px';
+
+	oA.onclick = function(){
+		if (oA.onOff){
+
+			fold(oP,unFold);
+			oA.onOff = false;
+			oA.innerHTML = '折叠';
+
+		} else {
+
+			oP.style.overflow = 'hidden';
+			fold(oP,110);
+			oA.onOff = true;
+			oA.innerHTML = '展开';
+		}
+	}
+
+	function fold(obj,target,endFn)
+	{
+
+		clearInterval(obj.timer);
+		obj.timer=setInterval(function(){
+
+			var now = obj.offsetHeight;
+			now = now>target? now -10 : now + 10; 
+
+			if (now!=target)
+			{
+				obj.style.height = now + 'px';
+			} else {
+				now = target;
+				obj.style.height = now + 'px';
+				clearInterval(obj.timer);
+			}
+
+			endFn && endFn();
+			
+		},10);
+	}
+
+}
+</script>
+<style>
+html{width: 640px;}
+body{width: 100%; padding: 0px; margin: 0px;}
+div {width:100%; border:4px solid #000;position: relative; overflow: auto;}
+div article {float: right; width: 300px; margin: 20px 0px; padding-left:80px; border-left: 1px solid black; overflow: auto;}
+div aside {float: left; width: 200px; margin: 20px 20px; }
+div article h1 {margin-bottom: 10px;}
+div aside img {margin-bottom: 10px; width: 100px; height: 130px;}
+div article p {width: 300px; height: 110px; overflow: hidden; position: relative;}
+a {width: 40px; height: 20px; background:#0CF; text-align:center; line-height:20px; font-size: 12px; color:black; text-decoration: none; position: absolute; bottom: 0px; right: 0px; z-index: 999;}
+
+</style>
+</head>
+<body>
+	<div id="book" >
+		<article>
+			<h1>TP-LINK</h1>
+			<p>普联技术有限公司（以下简称"TP-LINK"）是全球领先的网络通讯设备供应商。自1996年成立以来，TP-LINK始终致力于为大众提供最便利的本地局域网络互联和Internet接入手段，为大众在生活、工作、娱乐上日益增长的网络使用需求，提供高品质、高性能价格比的全面设备解决方案。TP-LINK产品涵盖以太网、无线局域网、宽带接入、电力线通信，在既有的传输、交换、路由等主要核心领域外，正大力扩展移动互联网终端、智能家居、网络安全等领域。
+
+      公司总部位于中国深圳，同时在北京、上海、广州等21个中国中心城市设有销售和服务中心，并在39个国家和地区分别设立了海外直属子公司或代表处，产品已应用于全球128个国家，产品销售总数将过8亿件。TP-LINK坚持自主研发、自主制造、自主营销，整合全球优质资源，使TP-LINK在创新能力、研发技术和对产品的控制能力方面形成强大合力。</p>
+		</article>
+		<aside>
+			<img src="" alt="image">
+			<h2>TP-LINK</h2>
+		</aside>
+	<a href="#">展开</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+	.red{
+
+		
+		width: 300px;
+		border: 1px red solid;
+		font-family: "微软雅黑";
+		font-style: italic;
+		text-indent: 2em;
+
+	}
+
+</style>
+
+<script>
+
+window.onload = function(){
+
+	var oPlus = document.getElementById('plus');
+	var oMinus = document.getElementById('minus');
+	var oRed = document.getElementById('btn1');
+	var oP = document.getElementById('p1');
+	var num = 15;
+	
+		oPlus.onclick =function(){
+		if (num <24) {
+		num++;
+		oP.style.fontSize = num + 'px';
+		}
+	}
+
+		oMinus.onclick =function(){
+		if (num >5) {
+		num--;
+		oP.style.fontSize = num + 'px';
+		}
+	}
+
+		oRed.onclick = function(){
+
+			p1.className = 'red';
+		}
+}
+
+</script>
+
+</head>
+
+<body>
+	
+	<input id="plus" type="button" value="+" />
+	<input id="minus" type="button" value='-' />
+	<input id="btn1" type="button" value='red' />
+
+
+	<p id="p1">普联技术有限公司（以下简称"TP-LINK"）是全球领先的网络通讯设备供应商。自1996年成立以来，TP-LINK始终致力于为大众提供最便利的本地局域网络互联和Internet接入手段，为大众在生活、工作、娱乐上日益增长的网络使用需求，提供高品质、高性能价格比的全面设备解决方案。TP-LINK产品涵盖以太网、无线局域网、宽带接入、电力线通信，在既有的传输、交换、路由等主要核心领域外，正大力扩展移动互联网终端、智能家居、网络安全等领域。
+
+   	公司总部位于中国深圳，同时在北京、上海、广州等21个中国中心城市设有销售和服务中心，并在39个国家和地区分别设立了海外直属子公司或代表处，产品已应用于全球128个国家，产品销售总数将过8亿件。TP-LINK坚持自主研发、自主制造、自主营销，整合全球优质资源，使TP-LINK在创新能力、研发技术和对产品的控制能力方面形成强大合力。
+   </p>
+
+
+</body>
+</html>

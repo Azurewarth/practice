@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<script>
+	
+	window.onload = function (){
+		var oTop =  document.getElementById('top');
+		var oBottom =  document.getElementById('bottom');
+		var oContent =  document.getElementById('content');
+		var aLi = document.getElementsByTagName('li');
+		var Timer1 = null;
+		var Timer2 = null;
+		var locate = null;
+
+		oTop.onmousedown = scrollUp;
+		oBottom.onmousedown = scrollDown;
+
+		oTop.onmouseup = stop;
+		oBottom.onmouseup = stop;
+
+		function scrollUp(){
+			Timer1=setInterval(function(){
+				if (oContent.scrollTop !== aLi.length * 30)
+				{
+					oContent.scrollTop += 20;
+				}
+			}, 56);
+		}
+		function scrollDown(){
+			Timer1=setInterval(function(){
+				if (oContent.scrollTop !== 0)
+				{
+					oContent.scrollTop -= 20;
+				}
+			}, 56);
+		}
+
+		function stop(){
+			clearInterval(Timer1);
+			clearInterval(Timer2);
+		}
+
+
+	}
+
+</script>
+
+
+
+<style>
+	
+	#div1{position: relative; margin: 30px auto; width: 100px;height: 400px; }
+	#top {position: absolute; top: -30px; width: 102px; height: 30px;background: #f1f1f1;}
+	#topC{margin: 4px auto; border-top:10px solid #f1f1f1; border-right:10px solid #f1f1f1; border-left:10px solid #f1f1f1;border-bottom: 10px solid black; height: 0; width: 0; }
+	#bottom {position: absolute; bottom: -30px; width: 102px; height: 30px;background:#f1f1f1;}
+	#bottomC{margin: 4px auto; border-bottom:10px solid #f1f1f1; border-right:10px solid #f1f1f1; border-left:10px solid #f1f1f1;border-top: 10px solid black; height: 0; width: 0; }
+	#content {border-left: 1px solid black; border-right: 1px solid black;  width: 100px;height: 400px; overflow: hidden;}
+	li {margin:0px;padding: 0px; list-style: none; height: 30px; width:80px; border-bottom: 1px solid green;}
+
+</style>
+
+<body>
+	<div id='div1'>
+		
+		<div id='top'><div id='topC'></div></div>
+		<div id='content'>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</div>
+		<div id='bottom'><div id='bottomC'></div></div>
+
+	</div>
+</body>
+</html>

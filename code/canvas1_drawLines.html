@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+window.onload = function(){
+	var oC=document.getElementById('draw');
+	var clr=document.getElementsByTagName('input')[0];
+
+	var oGC=oC.getContext('2d');
+
+	oC.onmousedown=function(ev){
+		ev = ev || window.event;
+			oGC.beginPath();
+			oGC.moveTo(ev.clientX-oC.offsetLeft,ev.clientY-oC.offsetTop);
+		document.onmousemove=function(ev){
+			oGC.lineTo(ev.clientX-oC.offsetLeft,ev.clientY-oC.offsetTop);
+			oGC.stroke();
+		}
+		document.onmouseup=function(){
+			document.onmouseup=document.onmousemove=null;
+		}
+
+		return false;
+	}
+
+	clr.onclick= function(){
+		oGC.clearRect(0,0,oC.width,oC.height);
+		oGC.closePath();
+	}
+}
+</script>
+<style>
+	canvas {position: absolute; top: 50px; left: 100px;}
+</style>
+</head>
+<body style='background:black;'>
+	<canvas id='draw' width='800' height='500' style="background:white;"></canvas>
+	<input type="button" value='clear' name='clr'>
+</body>
+</html>

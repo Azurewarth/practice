@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<script>
+	
+window.onload = function (){
+
+	var oBtn = document.getElementsByTagName('input');
+	var oDiv = document.getElementsByTagName('div');
+	var str	= '';
+	var arrColor = ['red','green','blue','yellow'];
+
+	oBtn[0].onclick = function(){
+		for (var i=0 ; i<100; i++){ 
+			str += '<div></div>';
+		};
+		document.body.innerHTML = str;
+		for (var j=0; j<oDiv.length; j++)
+		{
+			oDiv[j].innerHTML = j + 1;
+			oDiv[j].style.backgroundColor = arrColor[j%4];
+			oDiv[j].style.left = 10 + 60*(j%10) + 'px';
+			oDiv[j].style.top = 10 + 60*(parseInt(j/10)) + 'px';
+		}
+	}
+
+
+}
+
+</script>
+
+
+
+
+
+<style>
+	
+	div {width: 50px; height: 50px; color: #000; font-size: 30px; line-height: 50px; text-align: center;position: absolute; top: 0px ; left: 0px;}
+
+</style>
+
+
+
+<body>
+	
+<input type="button" value="original" />
+
+
+</body>
+</html>

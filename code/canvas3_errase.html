@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+window.onload = function() {
+	var oTC = document.getElementById('testCanvas');
+	var oGTC = oTC.getContext('2d');
+
+	oGTC.fillRect(0,0,oTC.width, oTC.height);
+
+	oTC.onmousedown = function(ev){
+		oGTC.save();
+		oGTC.moveTo(ev.clientX-oTC.offsetLeft,ev.clientY-oTC.offsetTop);
+		document.onmousemove = function(ev){
+			//oGTC.translate(-2,-2);
+			oGTC.clearRect(ev.clientX-oTC.offsetLeft, ev.clientY-oTC.offsetTop,15,15);
+			oGTC.restore();
+		}
+
+		document.onmouseup = function(){
+			document.onmousemove=document.onmouseup=null;
+		}
+
+		return false;
+	}
+}
+</script>
+<style>
+	#test {position:absolute; width: 400px; height: 400px; background: red;}
+	img {width: 400px; height: 400px;}
+	#testCanvas { position:absolute;}
+</style>
+</head>
+<body>
+	<div id="test">
+		<img src="1.jpg" alt="">
+	</div>
+	<canvas id="testCanvas" width="400" height="400"></canvas>
+</body>
+</html>

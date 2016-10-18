@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<script>
+	
+	window.onload = function() {
+		var oImg = document.getElementById('img1');
+		var arr = [];
+		var len = 20;
+		var num = 0;
+
+		for (var i = 20; i>0 ; i -= 2)
+		{
+			arr.push(i,-i)
+		}
+			arr.push(0);
+
+		
+		oImg.onclick = function(){
+			shake(this, 'width');
+		}
+
+
+
+		function shake(obj,attr){
+
+			clearInterval(obj.timer);
+
+			obj.timer = setInterval(function(){
+				oImg.style[attr] = parseInt(getStyle(oImg, attr)) + arr[num] + 'px';
+				// alert(getStyle(oImg, attr));
+				num++;
+				if (num===arr.length)
+				{
+					clearInterval(obj.timer);
+					num=0;
+				}
+			}, 30)
+		}
+
+		function getStyle(obj,attr){return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];}
+
+	}
+</script>
+
+
+
+<body>
+	
+
+	<img id='img1' src='../img/1.jpg' style="width: 300px;  position: absolute; top:120px; left:500px;"/>
+
+</body>
+</html>

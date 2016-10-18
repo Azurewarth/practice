@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<style>
+#div1 {
+
+	height: 400px;
+	width: 500px;
+	border: 2px black solid;
+	position: relative;
+	margin: 20px auto 0;
+
+}
+
+#div1 span {
+
+	width: 500px;
+	height: 30px;
+	background: black;
+	position: absolute;
+	color:white;	
+	opacity: 0.6;
+	text-align: center;
+	line-height: 30px;
+
+
+}
+#span1 {
+	top: 0;
+}
+#span2 {
+	left: 0;
+	bottom: 0px;
+}
+a {
+	text-decoration: none;
+	position: absolute;
+	height: 340px;
+	width: 30px;
+	opacity: ;
+	font-size: 30px;
+	text-align: center;
+	color: #fff;
+	line-height: 340px;
+}
+#prev {
+	top: 30px;
+	left: 0;
+}
+#next{
+	top: 30px;
+	right: 0;
+}
+
+a:hover{
+
+	background:black;
+	color: white;
+	opacity: 0.6;
+}
+img {
+	width: 500px;
+	height: 400px;
+}
+
+#div2 {
+
+	width: 500px;
+	height: 80px;
+	position: relative;
+	margin: 0 auto 0;
+	overflow: hidden;
+}
+
+input {
+
+	position: absolute;
+	margin: 5px 10px 0 10px;
+}
+#btn1 {
+	top: 0;
+	left: 160px;
+}
+#btn2{
+	top: 0px;
+	right: 160px;
+}
+#ispan{
+	position: absolute;
+	display: block;
+	width: inherit;
+	height: 40px;
+	bottom: 0;
+	background:black;
+	opacity: 0.7;
+	color:white;
+	text-align: center;
+	line-height: 40px;
+
+}
+
+
+</style>
+
+<script>
+		
+		window.onload = function (){
+
+			var oSpan1 = document.getElementById('span1');
+			var oSpan2 = document.getElementById('span2');
+			var oPrev = document.getElementById('prev');
+			var oNext = document.getElementById('next');
+			var oImg = document.getElementById('img1');
+			var num = 0;
+			var arrUrl = ['../img/1.jpg', '../img/2.gif', '../img/3.jpg', '../img/4.jpg'];
+			var arrStr = ['辐射','练成阵','别跳楼','蝙蝠侠'];
+			var oB1 = document.getElementById('btn1');
+			var oB2 = document.getElementById('btn2');
+			var oIspan = document.getElementById('ispan');
+			
+			function act(){
+			oImg.src = arrUrl[num];
+			oSpan1.innerHTML = num+1 +'/'+ arrStr.length;
+			oSpan2.innerHTML = arrStr[num];
+			}
+			act();
+			
+			oB1.onclick = function (){
+
+			oIspan.innerHTML = "现在是顺序播放";
+
+			oPrev.onclick = function(){
+
+				num--;
+				if (num == -1)
+				{
+					num = 0;
+					alert('已经是第一张了！');
+				}
+				act();
+			}
+			oNext.onclick = function(){
+
+				num++;
+				if (num == arrStr.length)
+				{
+					num = arrStr.length-1;
+					alert('已经是最后一张了！');
+				}
+				act();
+			}
+		}
+
+		oB2.onclick = function (){
+
+			oIspan.innerHTML = "现在是循环播放";
+
+			oPrev.onclick = function(){
+
+				num--;
+				if (num == -1)
+				{
+					num = arrStr.length-1;
+				}
+				act();
+			}
+			oNext.onclick = function(){
+
+				num++;
+				if (num == arrStr.length)
+				{
+					num = 0;
+				}
+				act();
+			}
+		}
+	}	
+
+</script>
+
+
+<body>
+	
+<div id="div2">
+	<input id="btn1" type="button" value="顺序播放">
+	<input id="btn2" type="button" value="循环播放">
+	<span id="ispan"></span>
+</div>
+
+<div id="div1">
+
+<img id="img1" src="" />
+	
+<span id="span1"></span>
+
+<a id="prev" href="javascript:;"><</a>
+<a id="next" href="javascript:;">></a>
+
+<span id="span2"></span>
+
+</div>
+
+</body>
+</html>

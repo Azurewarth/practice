@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+<script>
+window.onload= function(){
+	var mC= document.getElementById('myC');
+	var mGC= mC.getContext('2d');
+	var num=0;
+	var roNum=0;
+	var onOff=0;
+	
+	setInterval(function(){
+		var numAfter=0;
+		
+		if(roNum==0)
+		{
+			onOff=0;
+		}
+		if (roNum==20)
+		{
+			onOff=1;
+		}
+
+		if (onOff==0)
+		{
+			roNum++;
+		}
+		if (onOff==1){
+			roNum--;
+		}
+		numAfter=roNum/20;
+
+		mGC.clearRect(0,0,mC.width,mC.height);
+		mGC.save();
+		mGC.translate(100,100);
+		mGC.rotate(num*Math.PI/180);
+		mGC.scale(numAfter,numAfter);
+		mGC.translate(-50,-50);
+		mGC.fillRect(0,0,100,100);
+		mGC.restore();
+		num++;
+	},30);
+}
+</script>
+
+<style>
+	canvas {position: absolute; top: 100px; left: 200px;}
+</style>
+</head>
+<body>
+	<canvas id="myC" width="400" height="400"></canvas>
+</body>
+</html>

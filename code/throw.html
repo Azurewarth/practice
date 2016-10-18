@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var Left=0;
+	var Top=0;
+	var speedX=0;
+	var speedY=0;
+	var timer=null;
+
+	oDiv.onmousedown=function(ev){
+		var ev=ev || event;
+		var disX=ev.clientX-oDiv.offsetLeft;
+		var disY=ev.clientY-oDiv.offsetTop;
+		clearInterval(timer);
+
+		document.onmousemove=function(ev){
+			var ev=ev || event;
+			var L=ev.clientX-disX;
+			var T=ev.clientY-disY;
+			speedX=L-Left;
+			speedY=T-Top;
+			if(L<0)
+			{
+				L=0;
+			} else if (L>document.documentElement.clientWidth-oDiv.offsetWidth)
+			{
+				L=document.documentElement.clientWidth-oDiv.offsetWidth;
+			}
+			if(T<0)
+			{
+				T=0;
+			} else if (T>document.documentElement.clientHeight-oDiv.offsetHeight)
+			{
+				T=document.documentElement.clientHeight-oDiv.offsetHeight;
+			}
+			oDiv.style.left=L + 'px';
+			oDiv.style.top=T + 'px';
+			Left=L;
+			Top=T;
+		}
+		document.onmouseup=function(){
+			document.onmousemove=document.onmouseup=null;
+			rebound(oDiv,speedX,speedY);
+		}
+		return false;
+	}
+	function rebound(obj,dirX,dirY){		
+	clearInterval(timer);
+	timer=setInterval(function(){
+	dirY+=3;
+	var T=oDiv.offsetTop+dirY;
+	var L=oDiv.offsetLeft+dirX;
+
+	if(T==(document.documentElement.offsetHeight-oDiv.offsetHeight) && Math.abs(dirX)<1 && Math.abs(dirY)<1)
+	{
+		clearInterval(timer);
+	} else {
+		if(L<0)
+	{
+		L=0;
+		dirX*=-0.8;
+		dirY*=0.8;
+	} else if (L>document.documentElement.clientWidth-oDiv.offsetWidth)
+	{
+		L=document.documentElement.clientWidth-oDiv.offsetWidth;
+		dirX*=-0.8;
+		dirY*=0.8;
+	}
+	if(T<0)
+	{	
+		T=0;
+		dirY*=-0.8;
+		dirX*=0.8;
+	} else if (T>document.documentElement.clientHeight-oDiv.offsetHeight)
+	{
+		T=document.documentElement.clientHeight-oDiv.offsetHeight;
+		dirY*=-0.8;
+		dirX*=0.8;
+	}
+	oDiv.style.top=T + 'px';
+	oDiv.style.left=L + 'px';
+	}
+	},30)
+}
+}
+
+</script>
+<style>
+	div{position: absolute;  width: 100px;height: 100px; background:green;}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>
